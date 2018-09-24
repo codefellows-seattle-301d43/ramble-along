@@ -1,0 +1,26 @@
+{
+  "name": "ramble-along",
+  "version": "1.0.0",
+  "description": "Final Project for Code_Fellows 301",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramble-along/ramble-along.git"
+  },
+  "author": "Neth Horn, Brian Nelson, Christina Gislason, Carlos Cadena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ramble-along/ramble-along/issues"
+  },
+  "homepage": "https://github.com/Ramble-along/ramble-along#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "method-override": "^3.0.0",
+    "pg": "^7.4.3"
+  }
+}
