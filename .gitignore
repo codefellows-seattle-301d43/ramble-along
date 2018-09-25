@@ -154,4 +154,7 @@ $RECYCLE.BIN/
 # Environment Variables
 .env
 
+# Generated CSS
+main.css
+
 # End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
