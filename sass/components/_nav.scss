@@ -1,0 +1,68 @@
+
+header {
+  background-color: $text-color;
+  color: $background-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  a {
+    color: $background-color;
+    text-decoration: none;
+    &:hover {
+      color: $background-color;
+    }
+  }
+}
+
+.logo {
+  font-family: $fancy-font;
+}
+
+.nav-button {
+  font-family: $sans-serif-font;
+  font-size: 1.2em;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.menu {
+  background-color: $menu-color;
+  margin: 0;
+  padding: 5px;
+  
+}
+
+.menu-tabs {
+  display: none;
+}
+
+.nav-menu-option {
+  border: $dark-brown 1px solid;
+  padding: 5px;
+  text-align: center;
+  a {
+    color: $text-color;
+    font-family: $sans-serif-font;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: $dark-brown;
+    color: $background-color;
+    a {
+      color: $background-color;
+    }
+  }
+}
+
+@media (min-width: $breakpoint) {
+  .menu-tabs {
+    background-color: $menu-color;
+    display: flex;
+    flex-direction: row;
+  }
+
+  header button, .menu {
+    display: none;
+  }
+}
