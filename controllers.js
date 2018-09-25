@@ -15,12 +15,37 @@ function getHappeningsIndex(req, res) {
     } else {
       const happenings = [];
       res.render('index', {
-        happenings: result.rows
-      })
+        happenings: result.rows,
+      });
     }
-  })
-}
+  });
+};
+
+function getNewHappening(req, res) {
+  res.render('pages/new-happening');
+};
+
+function getHappened(req, res) {
+  res.render('pages/happened');
+};
+
+function getAboutUs(req, res) {
+  res.render('pages/about-us');
+};
+
+function getMyHappenings(req, res) {
+  res.render('pages/my-happenings');
+};
+
+function getSingleHappening(req, res) {
+  res.render('pages/single-happening');
+};
 
 module.exports = {
-  getHappeningsIndex
-}
+  getHappeningsIndex,
+  getNewHappening,
+  getHappened,
+  getAboutUs,
+  getMyHappenings,
+  getSingleHappening,
+};
