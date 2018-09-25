@@ -21,20 +21,20 @@ function getHappeningsIndex(req, res) {
         newObj.max_char = row.max_char
         newObj.max_haps = row.max_haps
         newObj.first = row.first_hap
-        client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position', [row.id], (err, haps) => {
+        client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position DESC', [row.id], (err, haps) => {
           if (err) console.log(err)
           else {
-            console.log(happenings)
-            newObj.last = haps.rows.length ? haps.rows[0].body : null
+            newObj.last = haps.rows.length ? haps.rows[0].body : null;
+            newObj.position = haps.rows.length ? haps.rows[0].position : 1;
             happenings.push(newObj)
+            if (happenings.length === 3) {
+              res.render('index', { happenings });
+            }
           }
-        })
-      })
-      res.render('index', {
-        happenings: happenings
-      })
+        });
+      });
     }
-  })
+  });
 }
 
 module.exports = {

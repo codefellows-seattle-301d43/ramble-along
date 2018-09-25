@@ -1,7 +1,7 @@
 <div class="card">
-    <h3>happening title</h3>
-    <p>first hap</p>
+    <h3><%= story.title %></h3>
+    <p><%= story.first %></p>
     ...
-    <p>last hap</p>
-    <p>progress/hap</p>
+    <p><%= story.last || '' %></p>
+    <p><%= story.position %>/<%= story.max_haps %></p>
   </div>

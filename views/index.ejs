@@ -9,14 +9,9 @@
     <button>Instructions</button>
     <section id="card-section">
       <h2>Continue... <button>&#8635;</button> </h2>
-      <%- include('partials/card'); -%>
-      <%- include('partials/card'); -%>
-      <%- include('partials/card'); -%>
+      <% happenings.forEach(story => { %>
+        <%- include('partials/card', { story: story }) %>
+      <% }) %>
     </section>
     <%- include('partials/footer'); -%>
-    <% happenings.forEach(happening => { %>
-      <%= happening.title %>
-      <%= happening.first %>
-      <%= happening.last %>
-    <% }) %>
 </body>
