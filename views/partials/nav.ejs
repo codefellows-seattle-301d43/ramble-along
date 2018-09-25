@@ -1,14 +1,14 @@
 <header>
-	<span><a href="/">Rambling Along</a></span>
-  <button class="hamburger">&#9776;</button>
-  <button class="cross">&#735;</button>
+	<span class="logo"><a href="/">Rambling Along</a></span>
+  <div class="nav-button hamburger">&#9776;</div>
+  <div class="nav-button cross">X</div>
+  <div class="menu-tabs">
+    <%- include('./nav-items') %>
+  </div>
 </header>
 
 <div class="menu">
-  <ul>
-    <a href="#"><li>MY HAPPENINGS</li></a>
-    <a href="#"><li>NEW HAPPENING</li></a>
-    <a href="#"><li>STORIES THAT HAPPENED</li></a>
-    <a href="#"><li>ABOUT US</li></a>
-  </ul>
+  <%- include('./nav-items'); %>
 </div> 
+
+<!-- &#735; -->
