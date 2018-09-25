@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS happenings (
   title VARCHAR (100),
   max_char INT,
   max_haps INT,
-  is_finished BOOLEAN
+  is_finished BOOLEAN,
+  first_hap VARCHAR(500)
 );
 
 CREATE TABLE IF NOT EXISTS haps (
@@ -17,18 +18,18 @@ CREATE TABLE IF NOT EXISTS haps (
 DELETE FROM haps;
 DELETE FROM happenings;
 
-INSERT INTO happenings (title, max_char, max_haps, is_finished) VALUES ('The Little Engine that Almost', 120, 30, false);
-INSERT INTO happenings (title, max_char, max_haps, is_finished) VALUES ('A Midsummers Nightmare', 200, 42, false);
-INSERT INTO happenings (title, max_char, max_haps, is_finished) VALUES ('The Boy Who Couldn''t Even', 255, 20, false);
+INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 120, 30, false, 'first happpppppp');
+INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 200, 42, false, 'first happpppppp');
+INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ('The Boy Who Couldn''t Even', 255, 20, false, 'first happpppppp');
 
 INSERT INTO haps (body, happenings_id, position) VALUES (
-  'blah',
+  'blah I am not last',
   (SELECT id FROM happenings WHERE max_char=120),
   1
 );
 
 INSERT INTO haps (body, happenings_id, position) VALUES (
-  'MORE blah',
+  'MORE blah I am last',
   (SELECT id FROM happenings WHERE max_char=120),
   2
 );
@@ -36,5 +37,11 @@ INSERT INTO haps (body, happenings_id, position) VALUES (
 INSERT INTO haps (body, happenings_id, position) VALUES (
   'blahing',
   (SELECT id FROM happenings WHERE max_char=200),
+  1
+);
+
+INSERT INTO haps (body, happenings_id, position) VALUES (
+  'blahing blah blah blah',
+  (SELECT id FROM happenings WHERE max_char=255),
   1
 );

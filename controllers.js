@@ -14,12 +14,28 @@ function getHappeningsIndex(req, res) {
       console.log('ERROR!!!', err);
     } else {
       const happenings = [];
-      res.render('index', {
-        happenings: result.rows,
+      result.rows.forEach(row => {
+        let newObj = {};
+        newObj.title = row.title
+        newObj.id = row.id
+        newObj.max_char = row.max_char
+        newObj.max_haps = row.max_haps
+        newObj.first = row.first_hap
+        client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position DESC', [row.id], (err, haps) => {
+          if (err) console.log(err)
+          else {
+            newObj.last = haps.rows.length ? haps.rows[0].body : null;
+            newObj.position = haps.rows.length ? haps.rows[0].position : 1;
+            happenings.push(newObj)
+            if (happenings.length === 3) {
+              res.render('index', { happenings });
+            }
+          }
+        });
       });
     }
   });
-};
+}
 
 function getNewHappening(req, res) {
   res.render('pages/new-happening');
@@ -40,6 +56,7 @@ function getMyHappenings(req, res) {
 function getSingleHappening(req, res) {
   res.render('pages/single-happening');
 };
+
 
 module.exports = {
   getHappeningsIndex,
