@@ -8,6 +8,7 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const sassMiddleware = require('node-sass-middleware');
+const ctrl = require('./controllers');
 
 app.use(sassMiddleware({
   src: path.join(__dirname, 'sass'),
@@ -30,9 +31,7 @@ app.use(methodOverride(function (req, res) {
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('index')
-});
+app.get('/', ctrl.getHappeningsIndex);
 
 app.get('/new', (req, res) => {
   res.render('pages/new-happening')
