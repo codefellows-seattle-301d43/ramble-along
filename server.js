@@ -22,7 +22,7 @@ app.use(methodOverride(function (req, res) {
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.send('HI!');
+  res.render('index')
 });
 
 app.listen(PORT, () => {
