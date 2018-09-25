@@ -14,4 +14,7 @@
       <%- include('partials/card'); -%>
     </section>
     <%- include('partials/footer'); -%>
+    <% happenings.forEach(happening => { %>
+      <%= happening.title %>
+    <% }) %>
 </body>
