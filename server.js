@@ -34,6 +34,11 @@ app.get('/', (req, res) => {
   res.render('index')
 });
 
+app.get('/new', (req, res) => {
+  res.render('pages/new-happening')
+});
+
+
 app.listen(PORT, () => {
   console.log(`We're happening on port ${PORT}!`);
 });
