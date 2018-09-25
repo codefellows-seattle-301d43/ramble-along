@@ -14,8 +14,24 @@ function getHappeningsIndex(req, res) {
       console.log('ERROR!!!', err);
     } else {
       const happenings = [];
+      result.rows.forEach(row => {
+        let newObj = {};
+        newObj.title = row.title
+        newObj.id = row.id
+        newObj.max_char = row.max_char
+        newObj.max_haps = row.max_haps
+        newObj.first = row.first_hap
+        client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position', [row.id], (err, haps) => {
+          if (err) console.log(err)
+          else {
+            console.log(happenings)
+            newObj.last = haps.rows.length ? haps.rows[0].body : null
+            happenings.push(newObj)
+          }
+        })
+      })
       res.render('index', {
-        happenings: result.rows
+        happenings: happenings
       })
     }
   })
