@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS happenings (
   id SERIAL PRIMARY KEY,
   title VARCHAR (100),
   max_char INT,
-  max_haps INT
+  max_haps INT,
+  is_finished BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS haps (
@@ -16,8 +17,8 @@ CREATE TABLE IF NOT EXISTS haps (
 DELETE FROM haps;
 DELETE FROM happenings;
 
-INSERT INTO happenings (title, max_char, max_haps) VALUES ('The Little Engine that Almost', 120, 30);
-INSERT INTO happenings (title, max_char, max_haps) VALUES ('A Midsummers Nightmare', 200, 42);
+INSERT INTO happenings (title, max_char, max_haps, is_finished) VALUES ('The Little Engine that Almost', 120, 30, false);
+INSERT INTO happenings (title, max_char, max_haps, is_finished) VALUES ('A Midsummers Nightmare', 200, 42, false);
 
 INSERT INTO haps (body, happenings_id, positon) VALUES (
   'blah',
