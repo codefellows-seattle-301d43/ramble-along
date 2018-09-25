@@ -5,7 +5,16 @@ require('dotenv').config();
 
 const PORT = process.env.PORT;
 const app = express();
+const path = require('path');
 const methodOverride = require('method-override');
+const sassMiddleware = require('node-sass-middleware');
+
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'sass'),
+  dest: path.join(__dirname, 'public'),
+  debug: true,
+  outputStyle: 'compressed'
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
