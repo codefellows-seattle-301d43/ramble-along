@@ -42,8 +42,8 @@ function getNewHappening(req, res) {
 };
 
 function addNewHappening(req, res) {
-  let SQL = 'INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5, $6)';
-  let values = [req.body.title, req.body.userId, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
+  let SQL = 'INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5, $6)';
+  let values = [req.body.title, req.body.user_id, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
   client.query(SQL, values, (err, result) => {
     if (err) {
       console.log(err);
