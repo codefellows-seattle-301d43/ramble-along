@@ -50,3 +50,7 @@ $( '.cross' ).on('click', function() {
 function populateHiddenInput() {
   $('#hidden-input-for-id').val(happeningId);
 }
+
+$('#refresh').on('click', () => {
+  window.location.href=window.location.href
+})
