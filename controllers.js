@@ -77,7 +77,6 @@ function getHappened(req, res) {
       
     }
   });
-  // res.render('pages/happened');
 };
 
 function getAboutUs(req, res) {
@@ -92,7 +91,7 @@ function getMyHappenings(req, res) {
       console.log(err);
       res.redirect('/error');
     } else {
-      res.render('pages/my-happenings', {happenings: result.rows,});
+      res.render('pages/my-happenings', {happenings: result.rows});
     }
   });
 };
@@ -107,7 +106,8 @@ function getSingleHappening(req, res) {
       res.redirect('/error');
     } else {
       client.query(SQL2, values, (err, results) => {
-        res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows});
+        let previous = !!results.rows.length ? results.rows[results.rows.length - 1] : { id: null, user_id: null, body: ''};
+        res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows, previous});
       })
     }
   })
