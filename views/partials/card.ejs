@@ -1,10 +1,12 @@
 <div class="card">
-    <h3><%= story.title %></h3>
-    <p><%= story.first_hap %></p>
-    ...
-    <p><%= story.last || '' %></p>
-    <% if (!!story.position) { %>
-      <p><%= story.position %>/<%= story.max_haps %></p>
-    <% } %>
-    <a href="/happening/<%= story.id %>">Continue this happening</a>
+  <div class = "haps">
+    <h2 class = "title"><%= story.title %></h2>
+      <div class="hap"><%= `"${story.first_hap}..."` %></div>
+      ...
+      <div class="hap"><%= `"...${story.last}..."`|| '' %></div>
+      <% if (!!story.position) { %>
+        <div><%= story.position %>/<%= story.max_haps %></div>
+      <% } %>
+      <a href="/happening/<%= story.id %>">Continue this happening</a>
   </div>
+</div>

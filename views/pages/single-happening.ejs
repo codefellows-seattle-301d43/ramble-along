@@ -5,9 +5,9 @@
 <body>
    <%- include('../partials/nav'); -%>
    <p><%= happenings.title %></p>
-   <div><%= happenings.first_hap %></div>
+   <div class ="hap"><%= happenings.first_hap %></div>
    <% haps.forEach(hap => {  %>
-    <div><%= hap.body %></div>
+    <div class="hap"><%= hap.body %></div>
   <% }) %>
    <%- include('../partials/footer'); -%>
 </body>
