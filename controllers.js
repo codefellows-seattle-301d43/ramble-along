@@ -54,7 +54,18 @@ function getMyHappenings(req, res) {
 };
 
 function getSingleHappening(req, res) {
-  res.render('pages/single-happening');
+  // res.render('pages/single-happening');
+  let SQL = 'SELECT * FROM happenings WHERE id = $1';
+  let values = [ req.params.id ]
+  client.query(SQL, values, (err, result) => {
+    if(err){
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      console.log('response', res.body)
+      res.render('pages/single-happening', {happenings: result.rows[0]});
+    }
+  })
 };
 
 
