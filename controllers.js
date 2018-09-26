@@ -20,7 +20,7 @@ function getHappeningsIndex(req, res) {
         newObj.id = row.id
         newObj.max_char = row.max_char
         newObj.max_haps = row.max_haps
-        newObj.first = row.first_hap
+        newObj.first_hap = row.first_hap
         client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position DESC', [row.id], (err, haps) => {
           if (err) console.log(err)
           else {
@@ -62,7 +62,17 @@ function getAboutUs(req, res) {
 };
 
 function getMyHappenings(req, res) {
-  res.render('pages/my-happenings');
+  //res.render('pages/my-happenings');
+  let SQL = 'SELECT * FROM happenings WHERE userId = $1';
+  let values = [ req.query.happeningId ];
+  client.query(SQL, values, (err, result) => {
+    if(err){
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      res.render('pages/my-happenings', {happenings: result.rows,});
+    }
+  });
 };
 
 function getSingleHappening(req, res) {

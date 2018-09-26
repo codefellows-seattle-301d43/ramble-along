@@ -20,7 +20,7 @@ DELETE FROM haps;
 DELETE FROM happenings;
 
 INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 'HlKvflDJmM', 120, 30, false, 'first happpppppp');
-INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 'dovsmd4jr7', 200, 42, false, 'first happpppppp');
+INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 'AU6IaeEPVi', 200, 42, false, 'first happpppppp');
 INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('The Boy Who Couldn''t Even', 'dsdofbeof2', 255, 20, false, 'first happpppppp');
 
 INSERT INTO haps (body, happenings_id, position) VALUES (

@@ -1,8 +1,10 @@
 <div class="card">
     <h3><%= story.title %></h3>
-    <p><%= story.first %></p>
+    <p><%= story.first_hap %></p>
     ...
     <p><%= story.last || '' %></p>
-    <p><%= story.position %>/<%= story.max_haps %></p>
+    <% if (!!story.position) { %>
+      <p><%= story.position %>/<%= story.max_haps %></p>
+    <% } %>
     <a href="/happening/<%= story.id %>">Continue this happening</a>
   </div>

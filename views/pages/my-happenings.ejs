@@ -4,5 +4,8 @@
 
 <body>
     <%- include('../partials/nav'); -%>
+    <% happenings.forEach(happening => { %>
+      <%- include('../partials/card', { story: happening}) %>
+    <% }) %>
     <%- include('../partials/footer'); -%>
 </body>
