@@ -41,6 +41,18 @@ function getNewHappening(req, res) {
   res.render('pages/new-happening');
 };
 
+function addNewHappening(req, res) {
+  let SQL = 'INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5) RETURNING id';
+  let values = [req.body.title, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
+  client.query(SQL, values, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(`/my-happenings?new=${result.rows[0].id}`);
+    }
+  })
+}
+
 function getHappened(req, res) {
   res.render('pages/happened');
 };
@@ -61,6 +73,7 @@ function getSingleHappening(req, res) {
 module.exports = {
   getHappeningsIndex,
   getNewHappening,
+  addNewHappening,
   getHappened,
   getAboutUs,
   getMyHappenings,

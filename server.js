@@ -33,6 +33,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', ctrl.getHappeningsIndex);
 app.get('/new-happening', ctrl.getNewHappening);
+app.post('/happening', ctrl.addNewHappening);
 app.get('/happened', ctrl.getHappened);
 app.get('/about-us', ctrl.getAboutUs);
 app.get('/my-happenings', ctrl.getMyHappenings);
