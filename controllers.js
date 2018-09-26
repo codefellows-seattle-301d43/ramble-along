@@ -48,7 +48,7 @@ function addNewHappening(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(`/my-happenings?happeningId=${req.body.userId}`);
+      res.redirect(`/my-happenings?happeningId=${req.body.user_id}`);
     }
   })
 }
@@ -62,7 +62,7 @@ function getAboutUs(req, res) {
 };
 
 function getMyHappenings(req, res) {
-  let SQL = 'SELECT * FROM happenings WHERE userId = $1';
+  let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
     if(err){
@@ -91,7 +91,18 @@ function getSingleHappening(req, res) {
 };
 
 function addNewHap(req, res) {
-  console.log('NEW HAP');
+  let SQL = 'INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES ($1, $2, $3, $4, $5)';
+  let values = [req.body.body, req.body.user_id, true, req.body.happenings_id, req.body.position];
+  client.query('UPDATE haps SET editable=false WHERE id=$1', [req.body.old_hap_id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      client.query(SQL, values, (err, data) => {
+        res.redirect(`/happening/${req.body.happenings_id}`);
+      });
+    }
+  });
 }
 
 function updateHap(req, res) {
