@@ -29,7 +29,7 @@ function createMyHappeningLink(id) {
 // Call functions on page load
 getUserId();
 
-// Hamburger Menu Controlls for nav.ejs
+// Hamburger Menu Controls for nav.ejs
 $( '.cross' ).hide();
 $( '.menu' ).hide();
 $( '.hamburger' ).on('click', function() {
@@ -54,5 +54,16 @@ function populateHiddenInput() {
 // Refresh button on index page for getting different stories
 $('#refresh').on('click', () => {
   window.location.href=window.location.href
-})
+});
+
+//appends an "active" class to .popup and .popup-content when the "Instructions" button is clicked
+$(".open").on("click", function() {
+  $(".popup-overlay, .popup-content").addClass("active");
+});
+
+//removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+$(".close, .popup-overlay").on("click", function(){
+  $(".popup-overlay, .popup-content").removeClass("active");
+});
+
 
