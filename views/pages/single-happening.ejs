@@ -3,11 +3,67 @@
  <%- include('../partials/head'); -%>
 
 <body>
-   <%- include('../partials/nav'); -%>
-   <p><%= happenings.title %></p>
-   <div class ="hap"><%= happenings.first_hap %></div>
-   <% haps.forEach(hap => {  %>
-    <div class="hap"><%= hap.body %></div>
-  <% }) %>
-   <%- include('../partials/footer'); -%>
+  <%- include('../partials/nav'); -%>
+  <div class="full-story">
+    <h2><%= happenings.title %></h2>
+    <h3><%= happenings.first_hap %></h3>
+    <div class="story-parts">
+    <% haps.forEach(hap => {  %>
+      <span><%= hap.body %></span>
+    <% }) %>
+    </div>
+    <form id="single-create-form" method="POST" action="/hap">
+      <input id="user_id_goes_here" type="hidden" name="user_id" />
+      <input type="hidden" name="happenings_id" value="<%=happenings.id%>" />
+      <input type="hidden" name="position" value="<%=haps.length + 1%>" />
+      <input type="hidden" name="old_hap_id" value="<%=previous.id%>" />
+      <h4>Add to the Story</h4>
+      <textarea 
+        name="body" 
+        placeholder="And then, this happened..." 
+        maxlength="<%=happenings.max_char%>"
+        required></textarea>
+      <p>Characters Remaining: <span class="calculated-chars-remaining"><%= happenings.max_char %></span></p>
+      <button>Add This!</button>
+    </form>
+    <form id="single-update-form" method="POST" action="/hap/<%=previous.id%>">
+      <input type="hidden" name="_method" value="PUT" />
+      <input type="hidden" name="id_of_happening" value="<%=happenings.id%>" />
+      <h4>Edit Your Last Contribution</h4>
+      <textarea name="body" maxlength="<%=happenings.max_char%>"><%= previous.body %></textarea>
+      <p>Characters Remaining: <span class="calculated-chars-remaining"><%= happenings.max_char - previous.body.length %></span></p>
+      <button>Update This!</button>
+    </form>
+    <form id="single-delete-form" method="POST" action="/happening/<%=happenings.id%>">
+      <input type="hidden" name="_method" value="DELETE" />
+      <h4>Delete Your Happening</h4>
+      <button>Delete This!</button>
+    </form>
+  </div>
+  <%- include('../partials/footer'); -%>
+  <script>
+    $('#user_id_goes_here').val(happeningId);
+    if ('<%=happenings.user_id%>' === happeningId) {
+      $('#single-create-form').hide();
+      $('#single-update-form').hide();
+      $('#single-delete-form').show();
+    } else if (<%=happenings.is_finished%>) {
+      $('#single-create-form').hide();
+      $('#single-update-form').hide();
+      $('#single-delete-form').hide();
+    } else if ('<%=previous.user_id%>' === happeningId) {
+      $('#single-create-form').hide();
+      $('#single-update-form').show();
+      $('#single-delete-form').hide();
+    } else {
+      $('#single-create-form').show();
+      $('#single-update-form').hide();
+      $('#single-delete-form').hide();
+    }
+    const maxLength = <%=happenings.max_char%>;
+    $('textarea').keyup(function() {
+      let length = maxLength - $(this).val().length;
+      $('.calculated-chars-remaining').text(length);
+    });
+  </script>
 </body>

@@ -11,9 +11,12 @@
 }
 
 .about {
-  width: 200px;
+  width: 200px; 
+  max-height: 200px;
+  object-fit: cover;
   border-radius: 50%;
   margin: 50px;
 }
+
 
 

@@ -8,7 +8,7 @@ client.connect();
 client.on('error', err => console.log(err));
 
 function getHappeningsIndex(req, res) {
-  const SQL = 'SELECT * FROM happenings ORDER BY random() LIMIT 3';
+  const SQL = 'SELECT * FROM happenings WHERE is_finished=false ORDER BY random() LIMIT 3';
   client.query(SQL, null, (err, result) => {
     if (err) {
       console.log('ERROR!!!', err);
@@ -27,7 +27,7 @@ function getHappeningsIndex(req, res) {
             newObj.last = haps.rows.length ? haps.rows[0].body : null;
             newObj.position = haps.rows.length ? haps.rows[0].position : 1;
             happenings.push(newObj)
-            if (happenings.length === 3) {
+            if (happenings.length === result.rows.length) {
               res.render('index', { happenings });
             }
           }
@@ -42,19 +42,41 @@ function getNewHappening(req, res) {
 };
 
 function addNewHappening(req, res) {
-  let SQL = 'INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5) RETURNING id';
-  let values = [req.body.title, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
+  let SQL = 'INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5, $6)';
+  let values = [req.body.title, req.body.user_id, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
   client.query(SQL, values, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(`/my-happenings?new=${result.rows[0].id}`);
+      res.redirect(`/my-happenings?happeningId=${req.body.user_id}`);
     }
   })
 }
 
 function getHappened(req, res) {
-  res.render('pages/happened');
+  const SQL = 'SELECT * FROM happenings WHERE is_finished=true ORDER BY random()';
+  client.query(SQL, null, (err, result) => {
+    if (err) {
+      console.log('Error in the get happened', err);
+    } else {
+      const happenings = []
+      if(result.rows.length){
+        let newObj = {};
+        result.rows.forEach(row => {
+          newObj.id = row.id
+          newObj.title = row.title
+          newObj.first_hap = row.first_hap
+          happenings.push(newObj)
+        })
+        
+        console.log('this shit right here', happenings)
+        res.render('pages/happened', { happenings });
+      } else {
+        res.render('pages/happened', { happenings: 'No one has completed a story yet!' });
+      }
+      
+    }
+  });
 };
 
 function getAboutUs(req, res) {
@@ -62,21 +84,19 @@ function getAboutUs(req, res) {
 };
 
 function getMyHappenings(req, res) {
-  //res.render('pages/my-happenings');
-  let SQL = 'SELECT * FROM happenings WHERE userId = $1';
+  let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
     if(err){
       console.log(err);
       res.redirect('/error');
     } else {
-      res.render('pages/my-happenings', {happenings: result.rows,});
+      res.render('pages/my-happenings', {happenings: result.rows});
     }
   });
 };
 
 function getSingleHappening(req, res) {
-  // res.render('pages/single-happening');
   let SQL = 'SELECT * FROM happenings WHERE id = $1';
   let SQL2 = 'SELECT * FROM haps WHERE happenings_id = $1';
   let values = [ req.params.id ]
@@ -85,15 +105,65 @@ function getSingleHappening(req, res) {
       console.log(err);
       res.redirect('/error');
     } else {
-      console.log('response', res.body);
       client.query(SQL2, values, (err, results) => {
-        console.log('Our Hap resuts:', results);
-        res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows});
+        let previous = !!results.rows.length ? results.rows[results.rows.length - 1] : { id: null, user_id: null, body: ''};
+        res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows, previous});
       })
     }
   })
 };
 
+function addNewHap(req, res) {
+  let SQL = 'INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES ($1, $2, $3, $4, $5)';
+  let values = [req.body.body, req.body.user_id, true, req.body.happenings_id, req.body.position];
+  client.query('UPDATE haps SET editable=false WHERE id=$1', [req.body.old_hap_id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      client.query(SQL, values, (err, data) => {
+        res.redirect(`/happening/${req.body.happenings_id}`);
+      });
+    }
+  });
+}
+
+function updateHap(req, res) {
+  client.query('SELECT editable FROM haps WHERE id=$1', [req.params.id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      if (!result.rows[0].editable) {
+        res.redirect('/error');
+      } else {
+        let SQL = 'UPDATE haps SET body=$1 WHERE id=$2';
+        let values = [req.body.body, req.params.id];
+          client.query(SQL, values, (err, result) => {
+            res.redirect(`/happening/${req.body.id_of_happening}`);
+        });
+      }
+    }
+  });
+};
+
+function deleteHappening(req, res) {
+  console.log('DELETE');
+  console.log(req.params.id);
+  client.query('DELETE FROM haps WHERE happenings_id=$1', [req.params.id], (err, result) => {
+    if (err) {
+      res.redirect('/error');
+    } else {
+      client.query('DELETE FROM happenings WHERE id=$1', [req.params.id], (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('/');
+        }
+      });
+    }
+  });
+}
 
 module.exports = {
   getHappeningsIndex,
@@ -103,4 +173,7 @@ module.exports = {
   getAboutUs,
   getMyHappenings,
   getSingleHappening,
+  addNewHap,
+  updateHap,
+  deleteHappening
 };

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS happenings (
   id SERIAL PRIMARY KEY,
   title VARCHAR(100),
-  userId VARCHAR(10),
+  user_id VARCHAR(10),
   max_char INT,
   max_haps INT,
   is_finished BOOLEAN,
@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS happenings (
 
 CREATE TABLE IF NOT EXISTS haps (
   id SERIAL PRIMARY KEY,
+  user_id VARCHAR(10),
+  editable BOOLEAN,
   body VARCHAR (500),
   happenings_id INT,
   position INT,
@@ -19,30 +21,38 @@ CREATE TABLE IF NOT EXISTS haps (
 DELETE FROM haps;
 DELETE FROM happenings;
 
-INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 'HlKvflDJmM', 120, 30, false, 'first happpppppp');
-INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 'AU6IaeEPVi', 200, 42, false, 'first happpppppp');
-INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ('The Boy Who Couldn''t Even', 'dsdofbeof2', 255, 20, false, 'first happpppppp');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 'HlKvflDJmM', 120, 30, false, 'first happpppppp');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 'AU6IaeEPVi', 200, 42, false, 'first happpppppp');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('The Boy Who Couldn''t Even', 'dsdofbeof2', 255, 20, false, 'first happpppppp');
 
-INSERT INTO haps (body, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'blah I am not last',
+  'tyxldkj345',
+  false,
   (SELECT id FROM happenings WHERE max_char=120),
   1
 );
 
-INSERT INTO haps (body, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'MORE blah I am last',
+  'HlKvflDJmM',
+  true,
   (SELECT id FROM happenings WHERE max_char=120),
   2
 );
 
-INSERT INTO haps (body, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'blahing',
+  'tyxldkj345',
+  true,
   (SELECT id FROM happenings WHERE max_char=200),
   1
 );
 
-INSERT INTO haps (body, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'blahing blah blah blah',
+  'tyxldkj345',
+  true,
   (SELECT id FROM happenings WHERE max_char=255),
   1
 );
