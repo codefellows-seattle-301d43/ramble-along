@@ -83,15 +83,41 @@ function getSingleHappening(req, res) {
       console.log(err);
       res.redirect('/error');
     } else {
-      console.log('response', res.body);
       client.query(SQL2, values, (err, results) => {
-        console.log('Our Hap resuts:', results);
         res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows});
       })
     }
   })
 };
 
+function addNewHap(req, res) {
+  console.log('NEW HAP');
+}
+
+function updateHap(req, res) {
+  console.log('UPDATE');
+  console.log(req.params.id);
+  client.query('SELECT editable FROM haps WHERE id=$1', [req.params.id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/error');
+    } else {
+      if (!result.rows[0].editable) {
+        res.redirect('/error');
+      } else {
+        let SQL = 'UPDATE haps SET body=$1 WHERE id=$2';
+        let values = [req.body.body, req.params.id];
+          client.query(SQL, values, (err, result) => {
+            res.redirect(`/happening/${req.body.id_of_happening}`);
+        });
+      }
+    }
+  });
+};
+
+function deleteHappening(req, res) {
+  console.log('DELETED');
+}
 
 module.exports = {
   getHappeningsIndex,
@@ -101,4 +127,7 @@ module.exports = {
   getAboutUs,
   getMyHappenings,
   getSingleHappening,
+  addNewHap,
+  updateHap,
+  deleteHappening
 };

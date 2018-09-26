@@ -38,6 +38,9 @@ app.get('/happened', ctrl.getHappened);
 app.get('/about-us', ctrl.getAboutUs);
 app.get('/my-happenings', ctrl.getMyHappenings);
 app.get('/happening/:id', ctrl.getSingleHappening);
+app.post('/hap', ctrl.addNewHap);
+app.put('/hap/:id', ctrl.updateHap);
+app.delete('/happening/:id', ctrl.deleteHappening);
 
 app.get('*', (request, response) => {
   response.statusCode = 404
