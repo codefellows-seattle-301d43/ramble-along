@@ -51,6 +51,7 @@ function populateHiddenInput() {
   $('#hidden-input-for-id').val(happeningId);
 }
 
+// Refresh button on index page for getting different stories
 $('#refresh').on('click', () => {
   window.location.href=window.location.href
 });
@@ -64,4 +65,5 @@ $(".open").on("click", function() {
 $(".close, .popup-overlay").on("click", function(){
   $(".popup-overlay, .popup-content").removeClass("active");
 });
+
 
