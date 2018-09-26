@@ -22,8 +22,11 @@
         <label for="max_haps">How Many Haps Should This Story Have?</label>
         <input type="number" name="max_haps" />
       </div>
-      <input id="hidden-input-for-haps" type="hidden" name="my_haps" />
+      <input id="hidden-input-for-id" type="hidden" name="userId" />
       <button class="submit-button">Create!</button>
     </form>
     <%- include('../partials/footer'); -%>
+    <script>
+      populateHiddenInput()
+    </script>
 </body>

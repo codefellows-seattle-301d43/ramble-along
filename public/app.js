@@ -46,3 +46,7 @@ $( '.cross' ).on('click', function() {
   });
 });
 
+// Populate hidden field in create new form
+function populateHiddenInput() {
+  $('#hidden-input-for-id').val(happeningId);
+}

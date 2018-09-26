@@ -42,13 +42,13 @@ function getNewHappening(req, res) {
 };
 
 function addNewHappening(req, res) {
-  let SQL = 'INSERT INTO happenings (title, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5) RETURNING id';
-  let values = [req.body.title, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
+  let SQL = 'INSERT INTO happenings (title, userId, max_char, max_haps, is_finished, first_hap) VALUES ($1, $2, $3, $4, $5, $6)';
+  let values = [req.body.title, req.body.userId, req.body.max_char, req.body.max_haps, false, req.body.first_hap];
   client.query(SQL, values, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(`/my-happenings?new=${result.rows[0].id}`);
+      res.redirect(`/my-happenings?happeningId=${req.body.userId}`);
     }
   })
 }
@@ -62,7 +62,6 @@ function getAboutUs(req, res) {
 };
 
 function getMyHappenings(req, res) {
-  //res.render('pages/my-happenings');
   let SQL = 'SELECT * FROM happenings WHERE userId = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
@@ -76,7 +75,6 @@ function getMyHappenings(req, res) {
 };
 
 function getSingleHappening(req, res) {
-  // res.render('pages/single-happening');
   let SQL = 'SELECT * FROM happenings WHERE id = $1';
   let SQL2 = 'SELECT * FROM haps WHERE happenings_id = $1';
   let values = [ req.params.id ]
