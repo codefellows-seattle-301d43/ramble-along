@@ -8,7 +8,7 @@ client.connect();
 client.on('error', err => console.log(err));
 
 function getHappeningsIndex(req, res) {
-  const SQL = 'SELECT * FROM happenings ORDER BY random() LIMIT 3';
+  const SQL = 'SELECT * FROM happenings WHERE is_finished=false ORDER BY random() LIMIT 3';
   client.query(SQL, null, (err, result) => {
     if (err) {
       console.log('ERROR!!!', err);
@@ -48,13 +48,36 @@ function addNewHappening(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(`/my-happenings?happeningId=${req.body.userId}`);
+      res.redirect(`/my-happenings?happeningId=${req.body.user_id}`);
     }
   })
 }
 
 function getHappened(req, res) {
-  res.render('pages/happened');
+  const SQL = 'SELECT * FROM happenings WHERE is_finished=true ORDER BY random()';
+  client.query(SQL, null, (err, result) => {
+    if (err) {
+      console.log('Error in the get happened', err);
+    } else {
+      const happenings = []
+      if(result.rows.length){
+        let newObj = {};
+        result.rows.forEach(row => {
+          newObj.id = row.id
+          newObj.title = row.title
+          newObj.first_hap = row.first_hap
+          happenings.push(newObj)
+        })
+        
+        console.log('this shit right here', happenings)
+        res.render('pages/happened', { happenings });
+      } else {
+        res.render('pages/happened', { happenings: 'No one has completed a story yet!' });
+      }
+      
+    }
+  });
+  // res.render('pages/happened');
 };
 
 function getAboutUs(req, res) {
@@ -62,7 +85,7 @@ function getAboutUs(req, res) {
 };
 
 function getMyHappenings(req, res) {
-  let SQL = 'SELECT * FROM happenings WHERE userId = $1';
+  let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
     if(err){
