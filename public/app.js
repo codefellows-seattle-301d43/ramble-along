@@ -1,13 +1,33 @@
 'use strict';
 
-// Check local storage and populate myHapsIds array
-let myHapsIds = [];
-function populateMyHaps() {
-  if (localStorage.getItem('myHapsArr')) {
-    myHapsIds = JSON.parse(localStorage.getItem('myHapsArr'));
+// Check local stroage for userId and create if needed
+let happeningId;
+function getUserId() {
+  if (!localStorage.getItem('happeningId')) {
+    happeningId = !!happeningId ? happeningId : createhappeningId();
+    localStorage.setItem('happeningId', happeningId);
+  } else {
+    happeningId = !!happeningId ? happeningId : localStorage.getItem('happeningId');
   }
+  createMyHappeningLink(happeningId);
+};
+
+function createhappeningId() {
+  let str = '';
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 10; i++) {
+    str += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return str;
+};
+
+// Pass the proper query string to my happenings link
+function createMyHappeningLink(id) {
+  $('#my-happenings-link').attr('href', `/my-happenings?happeningId=${id}`);
 }
-populateMyHaps();
+
+// Call functions on page load
+getUserId();
 
 // Hamburger Menu Controlls for nav.ejs
 $( '.cross' ).hide();
@@ -26,14 +46,3 @@ $( '.cross' ).on('click', function() {
   });
 });
 
-// Function that fires on loading my-happenings.ejs
-function pushToMyHaps(id) {
-  myHapsIds.push(id);
-  const myHapsStr = JSON.stringify(myHapsIds);
-  localsStorage.setItem('myHapsArr', myHapsStr);
-};
-
-// Function that populates hidden inputs with id numbers
-// function populateHiddenInput() {
-  
-// }
