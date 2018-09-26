@@ -27,7 +27,7 @@ function getHappeningsIndex(req, res) {
             newObj.last = haps.rows.length ? haps.rows[0].body : null;
             newObj.position = haps.rows.length ? haps.rows[0].position : 1;
             happenings.push(newObj)
-            if (happenings.length === 3) {
+            if (happenings.length === result.rows.length) {
               res.render('index', { happenings });
             }
           }
@@ -106,8 +106,6 @@ function addNewHap(req, res) {
 }
 
 function updateHap(req, res) {
-  console.log('UPDATE');
-  console.log(req.params.id);
   client.query('SELECT editable FROM haps WHERE id=$1', [req.params.id], (err, result) => {
     if (err) {
       console.log(err);
@@ -127,7 +125,21 @@ function updateHap(req, res) {
 };
 
 function deleteHappening(req, res) {
-  console.log('DELETED');
+  console.log('DELETE');
+  console.log(req.params.id);
+  client.query('DELETE FROM haps WHERE happenings_id=$1', [req.params.id], (err, result) => {
+    if (err) {
+      res.redirect('/error');
+    } else {
+      client.query('DELETE FROM happenings WHERE id=$1', [req.params.id], (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('/');
+        }
+      });
+    }
+  });
 }
 
 module.exports = {
