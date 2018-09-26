@@ -37,7 +37,15 @@ app.post('/happening', ctrl.addNewHappening);
 app.get('/happened', ctrl.getHappened);
 app.get('/about-us', ctrl.getAboutUs);
 app.get('/my-happenings', ctrl.getMyHappenings);
-app.get('/single-happening', ctrl.getSingleHappening);
+app.get('/happening/:id', ctrl.getSingleHappening);
+
+app.get('*', (request, response) => {
+  response.statusCode = 404
+  console.log(response.statusCode)
+  response.render('pages/error', {
+    error: '404 - Wrong path'
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`We're happening on port ${PORT}!`);
