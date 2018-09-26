@@ -16,16 +16,22 @@
       <input id="user_id_goes_here" type="hidden" name="user_id" />
       <input type="hidden" name="happenings_id" value="<%=happenings.id%>" />
       <input type="hidden" name="position" value="<%=haps.length + 1%>" />
-      <input type="hidden" name="old_hap_id" value="<%=haps[haps.length-1].id%>" />
+      <input type="hidden" name="old_hap_id" value="<%=previous.id%>" />
       <h4>Add to the Story</h4>
-      <textarea name="body" placeholder="And then, this happened..." required></textarea>
+      <textarea 
+        name="body" 
+        placeholder="And then, this happened..." 
+        maxlength="<%=happenings.max_char%>"
+        required></textarea>
+      <p>Characters Remaining: <span class="calculated-chars-remaining"><%= happenings.max_char %></span></p>
       <button>Add This!</button>
     </form>
-    <form id="single-update-form" method="POST" action="/hap/<%=haps[haps.length -1].id%>">
+    <form id="single-update-form" method="POST" action="/hap/<%=previous.id%>">
       <input type="hidden" name="_method" value="PUT" />
       <input type="hidden" name="id_of_happening" value="<%=happenings.id%>" />
       <h4>Edit Your Last Contribution</h4>
-      <textarea name="body"><%= haps[haps.length - 1].body %></textarea>
+      <textarea name="body" maxlength="<%=happenings.max_char%>"><%= previous.body %></textarea>
+      <p>Characters Remaining: <span class="calculated-chars-remaining"><%= happenings.max_char - previous.body.length %></span></p>
       <button>Update This!</button>
     </form>
     <form id="single-delete-form" method="POST" action="/happening/<%=happenings.id%>">
@@ -45,7 +51,7 @@
       $('#single-create-form').hide();
       $('#single-update-form').hide();
       $('#single-delete-form').hide();
-    } else if ('<%=haps[haps.length -1].user_id%>' === happeningId) {
+    } else if ('<%=previous.user_id%>' === happeningId) {
       $('#single-create-form').hide();
       $('#single-update-form').show();
       $('#single-delete-form').hide();
@@ -54,5 +60,10 @@
       $('#single-update-form').hide();
       $('#single-delete-form').hide();
     }
+    const maxLength = <%=happenings.max_char%>;
+    $('textarea').keyup(function() {
+      let length = maxLength - $(this).val().length;
+      $('.calculated-chars-remaining').text(length);
+    });
   </script>
 </body>

@@ -23,7 +23,7 @@ function createhappeningId() {
 
 // Pass the proper query string to my happenings link
 function createMyHappeningLink(id) {
-  $('#my-happenings-link').attr('href', `/my-happenings?happeningId=${id}`);
+  $('.my-happenings-link').attr('href', `/my-happenings?happeningId=${id}`);
 }
 
 // Call functions on page load
