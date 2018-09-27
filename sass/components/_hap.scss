@@ -1,3 +1,7 @@
+.haps {
+  width: 100%
+}
+
 .hap-body {
   background-color: lightgrey;
   margin: 5px 5px;
@@ -21,4 +25,8 @@
   top: -22px;
   background-color: $main-color;
   border-radius: 25px;
+}
+
+@media (min-width: $breakpoint) {
+  width: 75%;
 }

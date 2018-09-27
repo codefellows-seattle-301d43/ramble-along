@@ -1,8 +1,21 @@
-
 body {
-  background-color: $background-color;
+  background-color: $bg-color;
+  font-family: 'Roboto Slab';
+  font-weight: 300;
+  color: $text-color;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 #refresh:hover {
   cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.6em;
+  font-family: $card-title;
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
 }

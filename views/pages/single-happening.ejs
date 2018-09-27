@@ -10,6 +10,7 @@
     <form id="single-create-form" method="POST" action="/hap">
       <input id="user_id_goes_here" type="hidden" name="user_id" />
       <input type="hidden" name="happenings_id" value="<%=happenings.id%>" />
+      <input type="hidden" name="max_haps" value="<%=happenings.max_haps%>" />
       <input type="hidden" name="position" value="<%=haps.length + 1%>" />
       <input type="hidden" name="old_hap_id" value="<%=previous.id%>" />
       <h4>Add to the story...</h4>
@@ -26,7 +27,9 @@
       <input type="hidden" name="id_of_happening" value="<%=happenings.id%>" />
       <h4>Edit Your Last Contribution</h4>
       <textarea name="body" maxlength="<%=happenings.max_char%>"><%= previous.body %></textarea>
-      <p>Characters Remaining: <span class="calculated-chars-remaining"><%= happenings.max_char - previous.body.length %></span></p>
+      <p>Characters Remaining: <span class="calculated-chars-remaining">
+        <%= happenings.max_char - previous.body.length %>
+      </span></p>
       <button>Update This!</button>
     </form>
     <form id="single-delete-form" method="POST" action="/happening/<%=happenings.id%>">
