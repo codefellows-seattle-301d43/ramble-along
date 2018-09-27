@@ -1,12 +1,22 @@
 <div class="card">
   <div class = "haps">
-    <h2 class = "title"><%= story.title %></h2>
-      <div class="hap"><%= `"${story.first_hap}..."` %></div>
-      ...
-      <div class="hap"><%= `"...${story.last}..."`|| '' %></div>
-      <% if (!!story.position) { %>
+      <h2 class = "card-title"><%= story.title %></h2>
+      <div class = "hap">
+        <div class = "hap-title">The opening snippit</div>
+        <div class= "hap-body">
+          <img class="quote" src= "images/blockquote.svg">
+          <%= `${story.first_hap}...` %></div>
+      </div>
+      <div class="space">...</div>
+      <div class = "hap">
+        <div class = "hap-title">The most recent snippit</div>
+        <div class="hap-body">
+          <img class="quote" src= "images/blockquote.svg">
+          <%= `...${story.last}...`|| '' %></div>
+      <!-- <% if (!!story.position) { %>
         <div><%= story.position %>/<%= story.max_haps %></div>
-      <% } %>
-      <a href="/happening/<%= story.id %>">Continue this happening</a>
+      <% } %> -->
+      </div>
+      <a class = "see-happening" href="/happening/<%= story.id %>">Continue the story (<%= (story.max_haps-story.position) %> snippits left)</a>
   </div>
 </div>
