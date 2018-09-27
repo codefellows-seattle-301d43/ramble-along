@@ -26,8 +26,8 @@
   }
 }
 
-.exclaim-icon {
-  margin-right: 7px;
+.index-nav-icon {
+  display: none;
 }
 
 @media (min-width: $breakpoint) {
@@ -62,8 +62,8 @@
     }
   }
 
-  .exclaim-icon {
-    margin: 0;
+  .index-nav-icon {
+    display: inline;
   }
 }
 

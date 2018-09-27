@@ -6,8 +6,10 @@
   <%- include('partials/nav'); -%>
   <div class="index-controls">
     <div class="index-ctrl-icon">
-      <a href="/new-happening">&#9998;
-      <span class="tool-tip-text">Create New Happening</span></a>
+      <a href="/new-happening">
+        <span class="index-nav-icon">&#9998;</span>
+        <span class="tool-tip-text">Create New Happening</span>
+      </a>
     </div>
     <!--Creates the popup body-->
     <div class="popup-overlay">
@@ -21,10 +23,13 @@
     </div>
     <!--Content shown when popup is not displayed-->
     <div class="open index-ctrl-icon">
-      <span class="exclaim-icon">!</span>
+      <span class="index-nav-icon">!</span>
       <span class="tool-tip-text">Need Help?</span>
     </div>
-    <div class="index-ctrl-icon" id="refresh">&#8635;<span class="tool-tip-text">See Different Happenings</span></div>
+    <div class="index-ctrl-icon" id="refresh">
+      <span class="index-nav-icon">&#8635;</span>
+      <span class="tool-tip-text">See Different Happenings</span>
+    </div>
   </div>
 
   <section id="card-section">
