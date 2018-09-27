@@ -4,23 +4,27 @@
 
 <body>
   <%- include('partials/nav'); -%>
-
-  <button><a href="/new-happening">New Story</a></button>
-  
-  <!--Creates the popup body-->
-  <div class="popup-overlay">
-  <!--Creates the popup content-->
-  <div class="popup-content">
-    <h2>Instructions</h2>
-    <p> Rambling Along is an awesome new app that allows you, the HAPPENER, to start a new HAPPENING (a story!) OR interactively add to an existing story by creating a HAP.  If you are the original creator you get to determine how many characters are in each HAP (not to exceed 500 characters) and how many HAPs are in each HAPPENNING! Have fun, be creative, and enjoy the collaborative process with your family, friends, and enemies alike!</p>
-    <!--popup's close button-->
-    <button class="close">Start writing!</button>    </div>
+  <div class="index-controls">
+    <div class="index-ctrl-icon">
+      <a href="/new-happening">&#9998;</a>
+      <span class="tool-tip-text">Create New Happening</span>
+    </div>
+    <!--Creates the popup body-->
+    <div class="popup-overlay">
+      <!--Creates the popup content-->
+      <div class="popup-content">
+        <h2>Instructions</h2>
+        <p> Rambling Along is an awesome new app that allows you, the HAPPENER, to start a new HAPPENING (a story!) OR interactively add to an existing story by creating a HAP.  If you are the original creator you get to determine how many characters are in each HAP (not to exceed 500 characters) and how many HAPs are in each HAPPENNING! Have fun, be creative, and enjoy the collaborative process with your family, friends, and enemies alike!</p>
+        <!--popup's close button-->
+        <button class="close">Start writing!</button>    
+      </div>
+    </div>
+    <!--Content shown when popup is not displayed-->
+    <div class="open index-ctrl-icon">!<span class="tool-tip-text">Need Help?</span></div>
+    <div class="index-ctrl-icon id="refresh">&#8635;<span class="tool-tip-text">See Different Happenings</span></div>
   </div>
-  <!--Content shown when popup is not displayed-->
-  <button class="open">First time here?</button>
 
   <section id="card-section">
-    <h2>Continue... <span id="refresh">&#8635;</span> </h2>
     <% happenings.forEach(story => { %>
       <%- include('partials/card', { story: story }) %>
     <% }) %>
