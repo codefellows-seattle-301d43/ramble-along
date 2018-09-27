@@ -7,5 +7,8 @@
       <% happenings.forEach(story => { %>
         <%- include('../partials/finishedStory', {story: story}); -%>
       <% }) %>
+      <% if (!happenings.length) { %>
+        <h3>There are no completed happenings to find.</h3>
+      <% } %>
     <%- include('../partials/footer'); -%>
 </body>
