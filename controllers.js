@@ -75,7 +75,7 @@ function getHappened(req, res) {
 function getAboutUs(req, res) {
   res.render('pages/about-us');
 };
-
+//function
 function getMyHappenings(req, res) {
   let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];

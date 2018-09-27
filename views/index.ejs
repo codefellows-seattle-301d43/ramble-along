@@ -34,7 +34,7 @@
 
   <section id="card-section">
     <% happenings.forEach(story => { %>
-      <%- include('partials/card', { story: story }) %>
+      <%- include('partials/card', { story: story, location: 'index' }) %>
     <% }) %>
   </section>
   <%- include('partials/footer'); -%>

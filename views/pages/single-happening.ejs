@@ -4,20 +4,15 @@
 
 <body>
   <%- include('../partials/nav'); -%>
-  <div class="full-story">
-    <h2><%= happenings.title %></h2>
-    <h3><%= happenings.first_hap %></h3>
-    <div class="story-parts">
-    <% haps.forEach(hap => {  %>
-      <span><%= hap.body %></span>
-    <% }) %>
-    </div>
+  <%- include('../partials/card', { story: happenings, haps: haps, location: 'single_happening' }) %>
+  <div class="card">
+    <div class="haps">
     <form id="single-create-form" method="POST" action="/hap">
       <input id="user_id_goes_here" type="hidden" name="user_id" />
       <input type="hidden" name="happenings_id" value="<%=happenings.id%>" />
       <input type="hidden" name="position" value="<%=haps.length + 1%>" />
       <input type="hidden" name="old_hap_id" value="<%=previous.id%>" />
-      <h4>Add to the Story</h4>
+      <h4>Add to the story...</h4>
       <textarea 
         name="body" 
         placeholder="And then, this happened..." 
@@ -39,6 +34,7 @@
       <h4>Delete Your Happening</h4>
       <button>Delete This!</button>
     </form>
+  </div>
   </div>
   <%- include('../partials/footer'); -%>
   <script>
