@@ -1,7 +1,10 @@
 # 301-FINAL PROJECT
 301 Final project by Neth Horn, Brian Nelson, Carlos Cadena, Christina Gislason
+
 Project: RAMBLING ALONG 
+
 Description: An application that allows users to interactively contribute to writing a story. The user has the option to create a new story or choose from a selection of existing stories. The user will be able to define the limit to how many contributors are able to add to their stories, and each contribution will be limited to 140 characters.
+
 Problem Domain: Our app aims to give users a fun and collaborative means to pass their time, seek entertainment, or use as a fun tool to engage in a social settings. 
 ## USER STORIES
 ### As a User I want...
