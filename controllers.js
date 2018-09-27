@@ -60,21 +60,14 @@ function getHappened(req, res) {
       console.log('Error in the get happened', err);
     } else {
       const happenings = []
-      if(result.rows.length){
-        let newObj = {};
-        result.rows.forEach(row => {
-          newObj.id = row.id
-          newObj.title = row.title
-          newObj.first_hap = row.first_hap
-          happenings.push(newObj)
-        })
-        
-        console.log('this shit right here', happenings)
-        res.render('pages/happened', { happenings });
-      } else {
-        res.render('pages/happened', { happenings: 'No one has completed a story yet!' });
-      }
-      
+      let newObj = {};
+      result.rows.forEach(row => {
+        newObj.id = row.id
+        newObj.title = row.title
+        newObj.first_hap = row.first_hap
+        happenings.push(newObj)
+      });j
+      res.render('pages/happened', { happenings });
     }
   });
 };
