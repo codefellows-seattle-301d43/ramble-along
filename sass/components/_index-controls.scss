@@ -4,41 +4,19 @@
   justify-content: space-around;
   margin: 5px auto;
   text-align: center;
-  width: 50%;
   .index-ctrl-icon {
     align-items: center;
     background-color: $menu-color;
-    // border: $dark-brown 1px solid;
-    border-radius: 25px;
     cursor: pointer;
     display: flex;
-    font-size: 1.3em;
+    flex-direction: row;
+    font-size: 0.9em;
+    font-family: $sans-serif-font;
     font-weight: bold;
     height: 50px;
     justify-content: center;
     position: relative;
-    width: 50px;
-    .tool-tip-text {
-      background-color: $dark-brown;
-      border-radius: 6px;
-      color: $menu-color;
-      font-family: $sans-serif-font;
-      font-size: 0.5em;
-      padding: 5px 0;
-      position: absolute;
-      text-align: center;
-      top: 53px;
-      visibility: hidden;
-      width: 120px;
-      z-index: -1;
-    }
-    &:hover {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      font-size: 1.6em;
-    }
-    &:hover .tool-tip-text {
-      visibility: visible;
-    }
+    width: 30%;
     a {
       text-decoration: none;
       &:visited {
@@ -48,16 +26,55 @@
   }
 }
 
+.exclaim-icon {
+  margin-right: 7px;
+}
+
+@media (min-width: $breakpoint) {
+  .index-controls {
+    justify-content: center;
+    width: 80%;
+    .index-ctrl-icon {
+      border-radius: 25px;
+      font-size: 1.3em;
+      margin: 15px;
+      width: 50px;
+      .tool-tip-text {
+        background-color: $dark-brown;
+        border-radius: 6px;
+        color: $menu-color;
+        font-size: 0.5em;
+        padding: 5px 0;
+        position: absolute;
+        text-align: center;
+        top: 53px;
+        visibility: hidden;
+        width: 120px;
+        z-index: -1;
+      }
+      &:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        font-size: 1.6em;
+      }
+      &:hover .tool-tip-text {
+        visibility: visible;
+      }
+    }
+  }
+
+  .exclaim-icon {
+    margin: 0;
+  }
+}
+
 .popup-overlay {
   /*Hides pop-up when there is no "active" class*/
   background:#ffffff;
   border:3px solid #666666;
-  height:50%;
-  left:25%; 
   overflow: visible;
   position: absolute;
   visibility: hidden;
-  width:50%;
+  width: 90%;
   z-index: 100;
 }
 
@@ -75,4 +92,8 @@
 .popup-content.active {
   /*Shows pop-up content when "active" class is present */
   visibility:visible;
+}
+
+.close {
+  margin-bottom: 10px;
 }
