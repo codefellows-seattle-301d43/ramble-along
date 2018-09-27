@@ -4,8 +4,27 @@
 }
 
 .img-container {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  width: 100%;
+}
+
+.single-about {
+  margin: 5px auto;
+  width: 75%;
+}
+
+.about-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    font-family: $card-title;
+    font-size: 1.3em;
+    margin-right: 10px;
+    padding-bottom: 2px;
+  }
 }
 
 .about {
@@ -13,8 +32,16 @@
   max-height: 200px;
   object-fit: cover;
   border-radius: 50%;
-  margin: 50px;
 }
 
+@media (min-width: $breakpoint) {
+  .img-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 8px;
+  }
 
-
+  .single-about {
+    width: 23%;
+  }
+}
