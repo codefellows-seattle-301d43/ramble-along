@@ -30,21 +30,30 @@ function createMyHappeningLink(id) {
 getUserId();
 
 // Hamburger Menu Controls for nav.ejs
+const $menu = $('.menu');
 $( '.cross' ).hide();
-$( '.menu' ).hide();
+$menu.hide();
 $( '.hamburger' ).on('click', function() {
-  $( '.menu' ).slideToggle( 'slow', function() {
+  $menu.slideToggle( 'slow', function() {
     $( '.hamburger' ).hide();
     $( '.cross' ).show();
   });
 });
 
 $( '.cross' ).on('click', function() {
-  $( '.menu' ).slideToggle( 'slow', function() {
+  $menu.slideToggle( 'slow', function() {
     $( '.cross' ).hide();
     $( '.hamburger' ).show();
   });
 });
+
+$(document).mouseup(function (e) {
+   if (!$menu.is(e.target) && $menu.has(e.target).length === 0){
+     $menu.hide();
+     $( '.cross' ).hide();
+     $( '.hamburger' ).show();
+  }
+ });
 
 // Populate hidden field in create new form
 function populateHiddenInput() {
