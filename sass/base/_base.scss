@@ -14,46 +14,7 @@ $fancy-font: 'Kaushan Script', cursive;
 $sans-serif-font: 'Chivo', sans-serif;
 $card-title: 'Overpass Mono', monospace;
 
-.favicon {
-  height: 30px;
-  width: 30px;
- }
- .img-container {
-  /* display: flex; */
-  text-align: center;
-  width: 100%;
- }
- .about {
-  width: 200px;
-  border-radius: 50%;
-  margin: 50px;
- }
 
-.popup-overlay{
-  /*Hides pop-up when there is no "active" class*/
-  visibility:hidden;
-  position:absolute;
-  background:#ffffff;
-  border:3px solid #666666;
-  width:50%;
-  height:50%;
-  left:25%; 
-}
 
-.popup-overlay.active{
-  /*displays pop-up when "active" class is present*/
-  visibility:visible;
-  text-align:center;
-}
-
-.popup-content {
-  /*Hides pop-up content when there is no "active" class */
- visibility:hidden;
-}
-
-.popup-content.active {
-  /*Shows pop-up content when "active" class is present */
-  visibility:visible;
-}
 
  
