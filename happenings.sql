@@ -21,12 +21,12 @@ CREATE TABLE IF NOT EXISTS haps (
 DELETE FROM haps;
 DELETE FROM happenings;
 
-INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 'HlKvflDJmM', 120, 30, false, 'first happpppppp');
-INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummers Nightmare', 'AU6IaeEPVi', 200, 42, false, 'first happpppppp');
-INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('The Boy Who Couldn''t Even', 'dsdofbeof2', 255, 20, false, 'first happpppppp');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('The Little Engine that Almost', 'HlKvflDJmM', 120, 3, true, 'This is the story of the Little Engine that... well... couldn''t');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummer''s Nightmare', 'AU6IaeEPVi', 200, 3, false, 'Paul couldn''t believe what he saw as he walked in the door.');
+INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('Harborcoat', 'HlKvflDJmM', 255, 20, false, 'They crowded up to Lenin with their noses worn off.');
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
-  'blah I am not last',
+  'I mean, not for a lack of trying.',
   'tyxldkj345',
   false,
   (SELECT id FROM happenings WHERE max_char=120),
@@ -34,15 +34,23 @@ INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
 );
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
-  'MORE blah I am last',
-  'HlKvflDJmM',
+  'Look, doing stuff is really hard, okay!?',
+  'AU6IaeEPVi',
   true,
   (SELECT id FROM happenings WHERE max_char=120),
   2
 );
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
-  'blahing',
+  'Well I''d like to see you do better!',
+  'tyxldkj345',
+  true,
+  (SELECT id FROM happenings WHERE max_char=120),
+  3
+);
+
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+  'The blood was everywhere. Was Carl responsible? Was he capable of such a thing?',
   'tyxldkj345',
   true,
   (SELECT id FROM happenings WHERE max_char=200),
@@ -50,9 +58,9 @@ INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
 );
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
-  'blahing blah blah blah',
-  'tyxldkj345',
+  'Literally, was he capable? Carl was just a llama with a hat, just like Paul.',
+  'HlKvflDJmM',
   true,
-  (SELECT id FROM happenings WHERE max_char=255),
-  1
+  (SELECT id FROM happenings WHERE max_char=200),
+  2
 );
