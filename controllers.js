@@ -80,11 +80,13 @@ function getMyHappenings(req, res) {
   let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
+    console.log(result);
+    let happenings = result.rows.length ? result.rows : []; 
     if(err){
       console.log(err);
       res.redirect('/error');
     } else {
-      res.render('pages/my-happenings', {happenings: result.rows});
+      res.render('pages/my-happenings', {happenings,});
     }
   });
 };
