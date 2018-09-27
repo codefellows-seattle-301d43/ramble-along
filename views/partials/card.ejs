@@ -4,19 +4,48 @@
       <div class = "hap">
         <div class = "hap-title">The opening snippit</div>
         <div class= "hap-body">
-          <img class="quote" src= "images/blockquote.svg">
+          <img class="quote" src= "/images/blockquote.svg">
           <%= `${story.first_hap}...` %></div>
       </div>
-      <div class="space">...</div>
-      <div class = "hap">
-        <div class = "hap-title">The most recent snippit</div>
-        <div class="hap-body">
-          <img class="quote" src= "images/blockquote.svg">
-          <%= `...${story.last}...`|| '' %></div>
-      <!-- <% if (!!story.position) { %>
-        <div><%= story.position %>/<%= story.max_haps %></div>
-      <% } %> -->
-      </div>
-      <a class = "see-happening" href="/happening/<%= story.id %>">Continue the story (<%= (story.max_haps-story.position) %> snippits left)</a>
+      <% if(location === 'index'){ %>
+        <div class="space">...</div>
+        <div class="hap">
+          <div class="hap-title">The most recent snippit</div>
+          <div class="hap-body">
+            <img class="quote" src= "images/blockquote.svg">
+            ...<%= story.last || "default" %>...
+          </div>
+        </div>
+        <a class = "see-happening" href="/happening/<%= story.id %>">Continue the story (<%= (story.max_haps-story.position) %> snippits left)</a>
+      <% } else if(location === 'single_happening'){%>
+        <div class="hap">
+          <% haps.forEach(hap => { %>
+              <div class="hap-body">
+                ...<%= hap.body %>...
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else if(location === 'my_happenings') {%>
+        <div class="space">...</div>
+        <div class="hap">
+          <div class="hap-title">The most recent snippit</div>
+          <div class="hap-body">
+            <img class="quote" src= "images/blockquote.svg">
+            ...<%= story.last || "default" %>...
+          </div>
+        </div>
+        <a class = "see-happening" href="/happening/<%= story.id %>">See the full story</a>
+      <% } else if(location === 'happened') {%>
+        <div class="space">...</div>
+        <div class = "hap">
+          <div class = "hap-title">The final snippit</div>
+            <div class="hap-body">
+            <img class="quote" src= "images/blockquote.svg">
+            ...<%= story.last || "default" %>...
+          </div>
+        </div>
+        <a class = "see-happening" href="/happening/<%= story.id %>">See the full story</a>
+      <% } %>
   </div>
 </div>

@@ -22,7 +22,7 @@
   <section id="card-section">
     <h2>Continue... <span id="refresh">&#8635;</span> </h2>
     <% happenings.forEach(story => { %>
-      <%- include('partials/card', { story: story }) %>
+      <%- include('partials/card', { story: story, location: 'index' }) %>
     <% }) %>
   </section>
   <%- include('partials/footer'); -%>
