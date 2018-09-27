@@ -6,6 +6,7 @@
   <%- include('../partials/nav'); -%>
   <%- include('../partials/card', { story: happenings, haps: haps, location: 'single_happening' }) %>
   <div class="card">
+    <div class="haps">
     <form id="single-create-form" method="POST" action="/hap">
       <input id="user_id_goes_here" type="hidden" name="user_id" />
       <input type="hidden" name="happenings_id" value="<%=happenings.id%>" />
@@ -33,6 +34,7 @@
       <h4>Delete Your Happening</h4>
       <button>Delete This!</button>
     </form>
+  </div>
   </div>
   <%- include('../partials/footer'); -%>
   <script>
