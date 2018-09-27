@@ -22,6 +22,7 @@ $bg-color: #eee;
 $main-color: #fff;
 $text-color: #333;
 
+
 body {
   background-color: $bg-color;
   font-family: 'Roboto Slab';
@@ -73,5 +74,13 @@ p {
       background-color: $main-color;
       bottom: -2px;
     }
+  }
+}
+
+@media (max-width: $breakpoint) {
+  .card {
+    display: flex;
+    flex-direction: row;
+    max-width: 90%;
   }
 }
