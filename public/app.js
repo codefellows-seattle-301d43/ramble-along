@@ -31,18 +31,15 @@ getUserId();
 
 // Hamburger Menu Controls for nav.ejs
 const $menu = $('.menu');
-$( '.cross' ).hide();
 $menu.hide();
 $( '.hamburger' ).on('click', function() {
   $menu.slideToggle( 'slow', function() {
     $( '.hamburger' ).hide();
-    $( '.cross' ).show();
   });
 });
 
 $( '.cross' ).on('click', function() {
   $menu.slideToggle( 'slow', function() {
-    $( '.cross' ).hide();
     $( '.hamburger' ).show();
   });
 });
@@ -50,7 +47,6 @@ $( '.cross' ).on('click', function() {
 $(document).mouseup(function (e) {
    if (!$menu.is(e.target) && $menu.has(e.target).length === 0){
      $menu.hide();
-     $( '.cross' ).hide();
      $( '.hamburger' ).show();
   }
  });

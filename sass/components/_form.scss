@@ -57,4 +57,14 @@ form {
   .form-group-small {
     display: inline-block;
   }
+
+  #new-form { 
+    margin: 0 auto; 
+    width:750px;
+    }
+  
+  #new-form > button {
+    margin: 0 auto;
+    max-width: 500px
+  }
 }
