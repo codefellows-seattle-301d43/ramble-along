@@ -66,7 +66,7 @@ function getHappened(req, res) {
         newObj.title = row.title
         newObj.first_hap = row.first_hap
         happenings.push(newObj)
-      });j
+      });
       res.render('pages/happened', { happenings });
     }
   });
