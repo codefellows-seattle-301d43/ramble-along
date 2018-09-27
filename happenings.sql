@@ -64,3 +64,27 @@ INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   (SELECT id FROM happenings WHERE max_char=200),
   2
 );
+
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+  'A handshake is worthy, if it''s all that you''ve got.',
+  'tyxldkj345',
+  true,
+  (SELECT id FROM happenings WHERE max_char=255),
+  2
+);
+
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+  'Metal shivs on wood, pushed through our backs.',
+  'tyxldkj345',
+  true,
+  (SELECT id FROM happenings WHERE max_char=255),
+  3
+);
+
+INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+  'There''s a splinter in your eye, it reads "react".',
+  'tyxldkj345',
+  true,
+  (SELECT id FROM happenings WHERE max_char=255),
+  4
+);
