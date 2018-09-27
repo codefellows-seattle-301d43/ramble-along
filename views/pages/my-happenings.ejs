@@ -8,7 +8,7 @@
       <%- include('../partials/card', { story: happening, location: 'my_happenings'}) %>
     <% }) %>
     <% if (!happenings.length) { %>
-      <h3>You have not written any stories.</h3>
+      <div class="error-message">You have not written any stories.</h3>
     <% } %>
     <%- include('../partials/footer'); -%>
 </body>

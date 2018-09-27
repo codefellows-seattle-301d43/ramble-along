@@ -36,7 +36,7 @@ INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'Look, doing stuff is really hard, okay!?',
   'AU6IaeEPVi',
-  true,
+  false,
   (SELECT id FROM happenings WHERE max_char=120),
   2
 );
@@ -44,22 +44,22 @@ INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'Well I''d like to see you do better!',
   'tyxldkj345',
-  true,
+  false,
   (SELECT id FROM happenings WHERE max_char=120),
   3
 );
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'The blood was everywhere. Was Carl responsible? Was he capable of such a thing?',
-  'tyxldkj345',
-  true,
+  'HlKvflDJmM',
+  false,
   (SELECT id FROM happenings WHERE max_char=200),
   1
 );
 
 INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
   'Literally, was he capable? Carl was just a llama with a hat, just like Paul.',
-  'HlKvflDJmM',
+  'tyxldkj345',
   true,
   (SELECT id FROM happenings WHERE max_char=200),
   2

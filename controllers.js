@@ -14,25 +14,29 @@ function getHappeningsIndex(req, res) {
       console.log('ERROR!!!', err);
     } else {
       const happenings = [];
-      result.rows.forEach(row => {
-        let newObj = {};
-        newObj.title = row.title
-        newObj.id = row.id
-        newObj.max_char = row.max_char
-        newObj.max_haps = row.max_haps
-        newObj.first_hap = row.first_hap
-        client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position DESC', [row.id], (err, haps) => {
-          if (err) console.log(err)
-          else {
-            newObj.last = haps.rows.length ? haps.rows[0].body : null;
-            newObj.position = haps.rows.length ? haps.rows[0].position : 1;
-            happenings.push(newObj)
-            if (happenings.length === result.rows.length) {
-              res.render('index', { happenings });
+      if (!result.rows.length) {
+        res.render('index', { happenings });
+      } else {
+        result.rows.forEach(row => {
+          let newObj = {};
+          newObj.title = row.title
+          newObj.id = row.id
+          newObj.max_char = row.max_char
+          newObj.max_haps = row.max_haps
+          newObj.first_hap = row.first_hap
+          client.query('SELECT * FROM haps WHERE happenings_id= $1 ORDER BY position DESC', [row.id], (err, haps) => {
+            if (err) console.log(err)
+            else {
+              newObj.last = haps.rows.length ? haps.rows[0].body : null;
+              newObj.position = haps.rows.length ? haps.rows[0].position : 1;
+              happenings.push(newObj)
+              if (happenings.length === result.rows.length) {
+                res.render('index', { happenings });
+              }
             }
-          }
+          });
         });
-      });
+      }
     }
   });
 }
@@ -75,12 +79,11 @@ function getHappened(req, res) {
 function getAboutUs(req, res) {
   res.render('pages/about-us');
 };
-//function
+
 function getMyHappenings(req, res) {
   let SQL = 'SELECT * FROM happenings WHERE user_id = $1';
   let values = [ req.query.happeningId ];
   client.query(SQL, values, (err, result) => {
-    console.log(result);
     let happenings = result.rows.length ? result.rows : []; 
     if(err){
       console.log(err);
@@ -109,15 +112,23 @@ function getSingleHappening(req, res) {
 };
 
 function addNewHap(req, res) {
+  const remain_editable = !(req.body.max_haps === req.body.position);
   let SQL = 'INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES ($1, $2, $3, $4, $5)';
-  let values = [req.body.body, req.body.user_id, true, req.body.happenings_id, req.body.position];
+  let values = [req.body.body, req.body.user_id, remain_editable, req.body.happenings_id, req.body.position];
   client.query('UPDATE haps SET editable=false WHERE id=$1', [req.body.old_hap_id], (err, result) => {
     if (err) {
       console.log(err);
       res.redirect('/error');
     } else {
-      client.query(SQL, values, (err, data) => {
-        res.redirect(`/happening/${req.body.happenings_id}`);
+      const finished = !remain_editable;
+      client.query('UPDATE happenings SET is_finished=$1 WHERE id=$2', [finished, req.body.happenings_id], (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          client.query(SQL, values, (err, data) => {
+            res.redirect(`/happening/${req.body.happenings_id}`);
+          });
+        }
       });
     }
   });
@@ -143,8 +154,6 @@ function updateHap(req, res) {
 };
 
 function deleteHappening(req, res) {
-  console.log('DELETE');
-  console.log(req.params.id);
   client.query('DELETE FROM haps WHERE happenings_id=$1', [req.params.id], (err, result) => {
     if (err) {
       res.redirect('/error');

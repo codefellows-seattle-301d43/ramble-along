@@ -1,51 +1,47 @@
 <div class="card">
-  <div class = "haps">
-      <h2 class = "card-title"><%= story.title %></h2>
-      <div class = "hap">
-        <div class = "hap-title">The opening snippit</div>
-        <div class= "hap-body">
-          <img class="quote" src= "/images/blockquote.svg">
-          <%= `${story.first_hap}...` %></div>
+<!-- HTML THAT IS COMMON ACROSS ALL CARDS -->
+  <div class="haps">
+    <h2 class="card-title"><%= story.title %></h2>
+    <div class="hap">
+      <div class="hap-title">The opening snippit</div>
+      <div class="hap-body">
+      <img class="quote" src= "/images/blockquote.svg">
+      <%= `${story.first_hap}...` %></div>
+    </div>
+<!-- HTML THAT ONLY DISPLAYS ON THE INDEX PAGE -->
+    <% if (location === 'index'){ %>
+      <div class="space">...</div>
+      <div class="hap">
+        <div class="hap-title">The most recent snippit</div>
+        <div class="hap-body">
+          <img class="quote" src= "images/blockquote.svg">
+          ...<%= story.last || "default" %>...
+        </div>
       </div>
-      <% if(location === 'index'){ %>
-        <div class="space">...</div>
-        <div class="hap">
-          <div class="hap-title">The most recent snippit</div>
-          <div class="hap-body">
-            <img class="quote" src= "images/blockquote.svg">
-            ...<%= story.last || "default" %>...
-          </div>
-        </div>
-        <a class = "see-happening" href="/happening/<%= story.id %>">Continue the story (<%= (story.max_haps-story.position) %> snippits left)</a>
-      <% } else if(location === 'single_happening'){%>
-        <div class="hap">
-          <% haps.forEach(hap => { %>
-              <div class="hap-body">
-                ...<%= hap.body %>...
-              </div>
-            </div>
-          <% }) %>
-        </div>
-      <% } else if(location === 'my_happenings') {%>
-        <div class="space">...</div>
-        <div class="hap">
-          <div class="hap-title">The most recent snippit</div>
-          <div class="hap-body">
-            <img class="quote" src= "images/blockquote.svg">
-            ...<%= story.last || "default" %>...
-          </div>
-        </div>
-        <a class = "see-happening" href="/happening/<%= story.id %>">See the full story</a>
-      <% } else if(location === 'happened') {%>
-        <div class="space">...</div>
-        <div class = "hap">
-          <div class = "hap-title">The final snippit</div>
+      <a class = "see-happening" href="/happening/<%= story.id %>">
+        Continue the story (<%= (story.max_haps-story.position) %> snippits left)
+      </a>
+<!-- HTML THAT ONLY DISPLAYS ON THE SINGLE HAPPENING PAGE -->
+    <% } else if (location === 'single_happening') { %>
+      <div class="hap">
+        <% haps.forEach(hap => { %>
             <div class="hap-body">
-            <img class="quote" src= "images/blockquote.svg">
-            ...<%= story.last || "default" %>...
+              ...<%= hap.body %>...
+            </div>
           </div>
-        </div>
-        <a class = "see-happening" href="/happening/<%= story.id %>">See the full story</a>
+        <% }) %>
+      </div>
+<!-- HTML THAT ONLY DISPLAYS ON MY HAPPENINGS PAGE -->
+    <% } else if(location === 'my_happenings') { %>
+      <% if (story.is_finished) { %>
+        <a class = "see-happening" href="/happening/<%= story.id %>">See the COMPLETED story</a>
+      <% } else { %>
+        <a class = "see-happening" href="/happening/<%= story.id %>">See all story snippits</a>
       <% } %>
+      
+<!-- HTML THAT ONLY DISPLAYS ON THE FINISHED STORIES PAGE -->
+    <% } else if (location === 'happened') {%>
+      <a class = "see-happening" href="/happening/<%= story.id %>">See the full story</a>
+    <% } %>
   </div>
 </div>

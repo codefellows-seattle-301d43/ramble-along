@@ -5,10 +5,10 @@
 <body>
     <%- include('../partials/nav'); -%>
       <% happenings.forEach(story => { %>
-        <%- include('../partials/finishedStory', {story: story}); -%>
+        <%- include('../partials/card', { story: story, location: 'happened' }); -%>
       <% }) %>
       <% if (!happenings.length) { %>
-        <h3>There are no completed happenings to find.</h3>
+        <div class="error-message">There are no completed happenings to find.</div>
       <% } %>
     <%- include('../partials/footer'); -%>
 </body>

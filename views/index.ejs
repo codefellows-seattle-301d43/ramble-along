@@ -33,6 +33,9 @@
   </div>
 
   <section id="card-section">
+    <% if (!happenings.length) { %>
+      <div class="error-message">There are no Stories to Display. That is sad. Click the pencil or "New Happening" link to start one.</div>
+    <% } %>
     <% happenings.forEach(story => { %>
       <%- include('partials/card', { story: story, location: 'index' }) %>
     <% }) %>
