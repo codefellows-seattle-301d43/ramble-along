@@ -104,7 +104,7 @@ function getSingleHappening(req, res) {
       res.redirect('/error');
     } else {
       client.query(SQL2, values, (err, results) => {
-        let previous = !!results.rows.length ? results.rows[results.rows.length - 1] : { id: null, user_id: null, body: ''};
+        let previous = !!results.rows.length ? results.rows[results.rows.length - 1] : { id: 0, user_id: null, body: ''};
         res.render('pages/single-happening', {happenings: result.rows[0], haps: results.rows, previous});
       })
     }
@@ -112,45 +112,26 @@ function getSingleHappening(req, res) {
 };
 
 function addNewHap(req, res) {
-  const remain_editable = !(req.body.max_haps === req.body.position);
-  let SQL = 'INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES ($1, $2, $3, $4, $5)';
-  let values = [req.body.body, req.body.user_id, remain_editable, req.body.happenings_id, req.body.position];
-  client.query('UPDATE haps SET editable=false WHERE id=$1', [req.body.old_hap_id], (err, result) => {
+  let SQL = 'INSERT INTO haps (body, user_id, happenings_id, position) VALUES ($1, $2, $3, $4)';
+  let values = [req.body.body, req.body.user_id, req.body.happenings_id, req.body.position];
+  const finished = (req.body.max_haps === req.body.position);
+  client.query('UPDATE happenings SET is_finished=$1 WHERE id=$2', [finished, req.body.happenings_id], (err, result) => {
     if (err) {
       console.log(err);
       res.redirect('/error');
     } else {
-      const finished = !remain_editable;
-      client.query('UPDATE happenings SET is_finished=$1 WHERE id=$2', [finished, req.body.happenings_id], (err, result) => {
-        if (err) {
-          console.log(err);
-          res.redirect('/error', { error: 'failed to add snippet' });
-        } else {
-          client.query(SQL, values, (err, data) => {
-            res.redirect(`/happening/${req.body.happenings_id}`);
-          });
-        }
+      client.query(SQL, values, (err, data) => {
+        res.redirect(`/happening/${req.body.happenings_id}`);
       });
     }
   });
 }
 
 function updateHap(req, res) {
-  client.query('SELECT editable FROM haps WHERE id=$1', [req.params.id], (err, result) => {
-    if (err) {
-      console.log(err);
-      res.redirect('/error');
-    } else {
-      if (!result.rows[0].editable) {
-        res.redirect('/error');
-      } else {
-        let SQL = 'UPDATE haps SET body=$1 WHERE id=$2';
-        let values = [req.body.body, req.params.id];
-          client.query(SQL, values, (err, result) => {
-            res.redirect(`/happening/${req.body.id_of_happening}`);
-        });
-      }
-    }
+  let SQL = 'UPDATE haps SET body=$1 WHERE id=$2';
+  let values = [req.body.body, req.params.id];
+  client.query(SQL, values, (err, result) => {
+    res.redirect(`/happening/${req.body.id_of_happening}`);
   });
 };
 
