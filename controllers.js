@@ -64,8 +64,8 @@ function getHappened(req, res) {
       console.log('Error in the get happened', err);
     } else {
       const happenings = []
-      let newObj = {};
       result.rows.forEach(row => {
+        let newObj = {};
         newObj.id = row.id
         newObj.title = row.title
         newObj.first_hap = row.first_hap
