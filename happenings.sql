@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS happenings (
 CREATE TABLE IF NOT EXISTS haps (
   id SERIAL PRIMARY KEY,
   user_id VARCHAR(10),
-  editable BOOLEAN,
   body VARCHAR (500),
   happenings_id INT,
   position INT,
@@ -25,66 +24,58 @@ INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_h
 INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('A Midsummer''s Nightmare', 'AU6IaeEPVi', 200, 3, false, 'Paul couldn''t believe what he saw as he walked in the door.');
 INSERT INTO happenings (title, user_id, max_char, max_haps, is_finished, first_hap) VALUES ('Harborcoat', 'HlKvflDJmM', 255, 20, false, 'They crowded up to Lenin with their noses worn off.');
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'I mean, not for a lack of trying.',
   'tyxldkj345',
-  false,
   (SELECT id FROM happenings WHERE max_char=120),
   1
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'Look, doing stuff is really hard, okay!?',
   'AU6IaeEPVi',
-  false,
   (SELECT id FROM happenings WHERE max_char=120),
   2
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'Well I''d like to see you do better!',
   'tyxldkj345',
-  false,
   (SELECT id FROM happenings WHERE max_char=120),
   3
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'The blood was everywhere. Was Carl responsible? Was he capable of such a thing?',
   'HlKvflDJmM',
-  false,
   (SELECT id FROM happenings WHERE max_char=200),
   1
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'Literally, was he capable? Carl was just a llama with a hat, just like Paul.',
   'tyxldkj345',
-  true,
   (SELECT id FROM happenings WHERE max_char=200),
   2
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'A handshake is worthy, if it''s all that you''ve got.',
   'tyxldkj345',
-  true,
   (SELECT id FROM happenings WHERE max_char=255),
   2
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'Metal shivs on wood, pushed through our backs.',
   'tyxldkj345',
-  true,
   (SELECT id FROM happenings WHERE max_char=255),
   3
 );
 
-INSERT INTO haps (body, user_id, editable, happenings_id, position) VALUES (
+INSERT INTO haps (body, user_id, happenings_id, position) VALUES (
   'There''s a splinter in your eye, it reads "react".',
   'tyxldkj345',
-  true,
   (SELECT id FROM happenings WHERE max_char=255),
   4
 );
