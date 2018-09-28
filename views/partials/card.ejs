@@ -3,7 +3,7 @@
   <div class="haps">
     <h2 class="card-title"><%= story.title %></h2>
     <div class="hap">
-      <div class="hap-title">The opening snippit</div>
+      <div class="hap-title">The opening snippet</div>
       <div class="hap-body">
       <img class="quote" src= "/images/blockquote.svg">
       <%= `${story.first_hap}...` %></div>
@@ -12,14 +12,14 @@
     <% if (location === 'index'){ %>
       <div class="space">...</div>
       <div class="hap">
-        <div class="hap-title">The most recent snippit</div>
+        <div class="hap-title">The most recent snippet</div>
         <div class="hap-body">
           <img class="quote" src= "images/blockquote.svg">
           ...<%= story.last || "Be the first to add a snippet" %>...
         </div>
       </div>
       <a class = "see-happening" href="/happening/<%= story.id %>">
-        Continue the story (<%= (story.max_haps-story.position) %> snippits left)
+        Continue the story (<%= (story.max_haps-story.position) %> snippets left)
       </a>
 <!-- HTML THAT ONLY DISPLAYS ON THE SINGLE HAPPENING PAGE -->
     <% } else if (location === 'single_happening') { %>
@@ -35,7 +35,7 @@
       <% if (story.is_finished) { %>
         <a class = "see-happening" href="/happening/<%= story.id %>">See the COMPLETED story</a>
       <% } else { %>
-        <a class = "see-happening" href="/happening/<%= story.id %>">See all story snippits</a>
+        <a class = "see-happening" href="/happening/<%= story.id %>">See all story snippets</a>
       <% } %>
       
 <!-- HTML THAT ONLY DISPLAYS ON THE FINISHED STORIES PAGE -->
