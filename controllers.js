@@ -124,6 +124,7 @@ function addNewHap(req, res) {
       client.query('UPDATE happenings SET is_finished=$1 WHERE id=$2', [finished, req.body.happenings_id], (err, result) => {
         if (err) {
           console.log(err);
+          res.redirect('/error', { error: 'failed to add snippet' });
         } else {
           client.query(SQL, values, (err, data) => {
             res.redirect(`/happening/${req.body.happenings_id}`);
