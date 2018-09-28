@@ -44,12 +44,12 @@ $( '.cross' ).on('click', function() {
   });
 });
 
-$(document).mouseup(function (e) {
-   if ($(window).width() < 768 && !$menu.is(e.target) && $menu.has(e.target).length === 0){
-     $menu.hide();
-     $( '.hamburger' ).show();
-  }
- });
+$(window).on('scroll', function (e) {
+  if ($(window).width() < 768 && !$menu.is(e.target) && $menu.has(e.target).length === 0){
+    $menu.hide();
+    $( '.hamburger' ).show();
+ }
+});
 
 // Populate hidden field in create new form
 function populateHiddenInput() {
