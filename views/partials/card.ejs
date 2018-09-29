@@ -1,12 +1,17 @@
 <div class="card">
+<!-- I like these comments! I wish there were more in other ejs files. -->
 <!-- HTML THAT IS COMMON ACROSS ALL CARDS -->
   <div class="haps">
     <h2 class="card-title"><%= story.title %></h2>
     <div class="hap">
       <div class="hap-title">The opening snippet</div>
       <div class="hap-body">
-      <img class="quote" src= "/images/blockquote.svg">
-      <%= `${story.first_hap}...` %></div>
+        <!-- indentation is off here -->
+        <img class="quote" src= "/images/blockquote.svg">
+        <!-- In general, I'd rather use ejs for my templating instead of a template literal embedded within ejs. -->
+        <!-- So, I'd say <%= story.first_hap %>...</div> -->
+        <%= `${story.first_hap}...` %>
+      </div>
     </div>
 <!-- HTML THAT ONLY DISPLAYS ON THE INDEX PAGE -->
     <% if (location === 'index'){ %>
@@ -18,8 +23,9 @@
           ...<%= story.last || "Be the first to add a snippet" %>...
         </div>
       </div>
-      <a class = "see-happening" href="/happening/<%= story.id %>">
-        Continue the story (<%= (story.max_haps-story.position) %> snippets left)
+      <!-- Could use consistency within a line on whether there are spaces between attrs or not. -->
+      <a class="see-happening" href="/happening/<%= story.id %>">
+        Continue the story (<%= story.max_haps-story.position %> snippets left)
       </a>
 <!-- HTML THAT ONLY DISPLAYS ON THE SINGLE HAPPENING PAGE -->
     <% } else if (location === 'single_happening') { %>
@@ -32,6 +38,7 @@
       </div>
 <!-- HTML THAT ONLY DISPLAYS ON MY HAPPENINGS PAGE -->
     <% } else if(location === 'my_happenings') { %>
+      <!-- I'd rather put this conditional just around the text, since the rest is the same! So put the a tag, and inside of it put the conditional just around the text, and then close the a tag outside of the conditional. -->
       <% if (story.is_finished) { %>
         <a class = "see-happening" href="/happening/<%= story.id %>">See the COMPLETED story</a>
       <% } else { %>

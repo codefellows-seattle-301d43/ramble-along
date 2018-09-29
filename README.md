@@ -2,10 +2,12 @@
 301 Final project by Neth Horn, Brian Nelson, Carlos Cadena, Christina Gislason
 
 Project: RAMBLING ALONG 
-
+<!-- You're missing an eslintrc file, so not enforcing common standards across your computers. -->
 Description: An application that allows users to interactively contribute to writing a story. The user has the option to create a new story or choose from a selection of existing stories. The user will be able to define the limit to how many contributors are able to add to their stories, and each contribution will be limited to 140 characters.
 
 Problem Domain: Our app aims to give users a fun and collaborative means to pass their time, seek entertainment, or use as a fun tool to engage in a social settings. 
+
+<!-- You're missing directions for a user to get this up and running on their own machines. Do I need to run npm install? A .env file? What needs to be in it? etc -->
 ## USER STORIES
 ### As a User I want...
 1. An easy to navigate page to prevent confusing layouts or links.
@@ -48,4 +50,5 @@ We want to create a safe environment where everyone feels comfortable speaking u
 8. Produce easy to navigate pages with clear navigation.
 9. Use proper CSS styling to create a visually appealing page.
 ## VERSION HISTORY
+<!-- oh no -->
 Version 1.0.0 -- Initial Working Product

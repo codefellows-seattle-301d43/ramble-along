@@ -39,6 +39,7 @@
   </div>
   </div>
   <%- include('../partials/footer'); -%>
+  <!-- I'd consider putting this much code in another JS file that you pull in here. -->
   <script>
     $('#user_id_goes_here').val(happeningId);
     if ('<%=happenings.user_id%>' === happeningId) {

@@ -21,7 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true, }));
 app.use(express.static('./public'));
 
-app.use(methodOverride(function (req, res) {
+// could use a comment here to explain where this code came from
+app.use(methodOverride(function (req) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     var method = req.body._method;
     delete req.body._method;
@@ -31,6 +32,7 @@ app.use(methodOverride(function (req, res) {
 
 app.set('view engine', 'ejs');
 
+// this looks nice
 app.get('/', ctrl.getHappeningsIndex);
 app.get('/new-happening', ctrl.getNewHappening);
 app.post('/happening', ctrl.addNewHappening);
@@ -43,13 +45,14 @@ app.put('/hap/:id', ctrl.updateHap);
 app.delete('/happening/:id', ctrl.deleteHappening);
 
 app.get('*', (request, response) => {
-  response.statusCode = 404
-  console.log(response.statusCode)
+  response.statusCode = 404;
+  console.log(response.statusCode);
   response.render('pages/error', {
     error: '404 - Wrong path'
-  })
-})
+  });
+});
 
 app.listen(PORT, () => {
+  // fantastic message
   console.log(`We're happening on port ${PORT}!`);
 });
